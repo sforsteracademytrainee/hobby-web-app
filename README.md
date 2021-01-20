@@ -1,4 +1,4 @@
 # Hobby Web Application
-# Car Registration Service
+Car Registration Service
 
 Description here.
