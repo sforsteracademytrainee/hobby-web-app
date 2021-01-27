@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
@@ -22,18 +22,16 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qa.hobby.HobbyWebAppApplication;
+import com.qa.hobby.persistence.domain.PersonDomain;
 import com.qa.hobby.persistence.domain.VehicleDomain;
+import com.qa.hobby.persistence.dto.PersonDTO;
 import com.qa.hobby.persistence.dto.VehicleDTO;
-
-import net.bytebuddy.asm.Advice.This;
 
 @SpringBootTest(classes = HobbyWebAppApplication.class)
 @AutoConfigureMockMvc
 @Sql(scripts = {"classpath:schema-test.sql", "classpath:data-test.sql"}, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 @ActiveProfiles(profiles = "test")
-public class VehicleControllerIntegrationTest {
-	
-	// TODO make sure all dependencies above are actually done
+public class PersonControllerIntegrationTest {
 	
 	@Autowired
 	private MockMvc mock;
@@ -44,8 +42,8 @@ public class VehicleControllerIntegrationTest {
 	@Autowired
 	private ObjectMapper jsonifier;
 	
-	private VehicleDTO mapToDTO(VehicleDomain model) {
-		return this.mapper.map(model, VehicleDTO.class);
+	private PersonDTO mapToDTO(PersonDomain model) {
+		return this.mapper.map(model, PersonDTO.class);
 	}
 	
 	// TESTS
@@ -54,11 +52,11 @@ public class VehicleControllerIntegrationTest {
 	@Test
 	public void testCreate() throws Exception {
 		
-		VehicleDomain TEST_DOMAIN = new VehicleDomain("AA11 AAA", "Ford", "Ka");
+		PersonDomain TEST_DOMAIN = new PersonDomain("Patrick", "Star", "2 Spongebob Lane", "01");
 		TEST_DOMAIN.setId(3L);
 		// Prepared REST request
 		MockHttpServletRequestBuilder mockRequest = 
-				MockMvcRequestBuilders.request(HttpMethod.POST, "/vehicle/create")
+				MockMvcRequestBuilders.request(HttpMethod.POST, "/person/create")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(this.jsonifier.writeValueAsString(TEST_DOMAIN))
 				.accept(MediaType.APPLICATION_JSON);
@@ -79,11 +77,11 @@ public class VehicleControllerIntegrationTest {
 
 		final Long ID = 1L;
 //		VehicleDomain TEST_VEHICLEDOMAIN = new VehicleDomain("AA11 AAA", "Ford", "Ka");
-		VehicleDTO TEST_DTO = new VehicleDTO(1L, "AA11 AAA", "Ford", "Ka");
+		PersonDTO TEST_DTO = new PersonDTO(ID, "Rupert", "Robinson", "32 Drive Way", "07 111 111 111");
 		
 		// Prepared REST request
 		MockHttpServletRequestBuilder mockRequest = 
-				MockMvcRequestBuilders.request(HttpMethod.GET, "/vehicle/read/"+ID)
+				MockMvcRequestBuilders.request(HttpMethod.GET, "/person/read/"+ID)
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON);
 		
@@ -99,14 +97,13 @@ public class VehicleControllerIntegrationTest {
 	
 	@Test
 	public void testReadAll() throws Exception{
-		List<VehicleDTO> TEST_DTOS = new ArrayList<VehicleDTO>();
-		TEST_DTOS.add(new VehicleDTO(1L, "AA11 AAA", "Ford", "Ka"));
-		TEST_DTOS.add(new VehicleDTO(2L, "BB22 BBB", "Toyota", "Prius"));
-		TEST_DTOS.add(new VehicleDTO(3L, "CC33 CCC", "BMW", "Gran Tourer"));
+		List<PersonDTO> TEST_DTOS = new ArrayList<PersonDTO>();
+		TEST_DTOS.add(new PersonDTO(1L, "Rupert", "Robinson", "32 Drive Way", "07 111 111 111"));
+		TEST_DTOS.add(new PersonDTO(2L, "Tex", "Johnson", "17 Lane Road", "07 222 222 222"));
 		
 		// Prepared REST request
 		MockHttpServletRequestBuilder mockRequest = 
-				MockMvcRequestBuilders.request(HttpMethod.GET, "/vehicle/readAll")
+				MockMvcRequestBuilders.request(HttpMethod.GET, "/person/readAll")
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON);
 		
@@ -124,13 +121,13 @@ public class VehicleControllerIntegrationTest {
 	@Test
 	public void testUpdate() throws Exception {
 		
-		final Long ID = 3L;
+		final Long ID = 2L;
 		
-		VehicleDomain TEST_DOMAIN = new VehicleDomain("DA11 AAA", "Fokd", "Ka");
+		PersonDomain TEST_DOMAIN = new PersonDomain("Patrick", "Star", "2 Spongebob Lane", "01");
 		TEST_DOMAIN.setId(ID);
 		// Prepared REST request
 		MockHttpServletRequestBuilder mockRequest = 
-				MockMvcRequestBuilders.request(HttpMethod.PUT, "/vehicle/update/"+ID)
+				MockMvcRequestBuilders.request(HttpMethod.PUT, "/person/update/"+ID)
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(this.jsonifier.writeValueAsString(TEST_DOMAIN))
 				.accept(MediaType.APPLICATION_JSON);
@@ -151,7 +148,7 @@ public class VehicleControllerIntegrationTest {
 		final Long ID = 1L;
 		
 		MockHttpServletRequestBuilder mockRequest =
-				MockMvcRequestBuilders.request(HttpMethod.DELETE, "/vehicle/delete/"+ID);
+				MockMvcRequestBuilders.request(HttpMethod.DELETE, "/person/delete/"+ID);
 		
 		this.mock.perform(mockRequest)
 		.andExpect(MockMvcResultMatchers.status().isNoContent());
