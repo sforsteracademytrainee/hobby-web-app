@@ -36,4 +36,12 @@ public class PersonDomain {
 	@OneToMany(mappedBy = "keeper", fetch = FetchType.EAGER)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<VehicleDomain> vehicleList;
+	
+	public PersonDomain(String firstName, String surname, String address, String phone) {
+		super();
+		this.firstName = firstName;
+		this.surname = surname;
+		this.address = address;
+		this.phone = phone;
+	}
 }
