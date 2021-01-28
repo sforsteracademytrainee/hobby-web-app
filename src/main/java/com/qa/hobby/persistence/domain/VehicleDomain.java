@@ -1,6 +1,7 @@
 package com.qa.hobby.persistence.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
@@ -25,7 +26,7 @@ public class VehicleDomain {
 	private String make;
 	private String model;
 	
-	@ManyToOne
+	@ManyToOne(optional = true, fetch = FetchType.LAZY)
 	private PersonDomain keeper;
 	
 	public VehicleDomain(String registrationNumber, String make, String model) {

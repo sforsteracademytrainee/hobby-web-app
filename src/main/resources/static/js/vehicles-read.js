@@ -78,17 +78,20 @@ const parseDetails = (id, json) => {
 	let addressText = document.createTextNode(json.make + " " + json.model);
 	addressElement.appendChild(addressText);
 	list.appendChild(addressElement);
+	console.log(json.keeper);
 	
-	let keeperElement = document.createElement("li");
-	keeperElement.setAttribute("class", "list-group-item");
-	let keeperText = document.createTextNode(json.keeper.firstName + " " + json.keeper.surname + " ");
-	keeperElement.appendChild(keeperText);
-	let keeperLink = document.createElement("a");
-	keeperLink.setAttribute("href", "people-read.html?id="+json.keeper.id);
-	let keeperLinkText = document.createTextNode("View");
-	keeperLink.appendChild(keeperLinkText);
-	keeperElement.appendChild(keeperLink);
-	list.appendChild(keeperElement);
+	if (json.keeper != null) {
+		let keeperElement = document.createElement("li");
+		keeperElement.setAttribute("class", "list-group-item");
+		let keeperText = document.createTextNode(json.keeper.firstName + " " + json.keeper.surname + " ");
+		keeperElement.appendChild(keeperText);
+		let keeperLink = document.createElement("a");
+		keeperLink.setAttribute("href", "people-read.html?id="+json.keeper.id);
+		let keeperLinkText = document.createTextNode("View");
+		keeperLink.appendChild(keeperLinkText);
+		keeperElement.appendChild(keeperLink);
+		list.appendChild(keeperElement);
+	}
 	
 	// do keeper loop here
 	
