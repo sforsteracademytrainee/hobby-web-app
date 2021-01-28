@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Vehicle Registration</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body onload="">
+	<!--  NAVBAR  -->
+    <nav class="navbar navbar-light bg-light">
+        <a href="index.html" class="navbar-brand">Vehicle Registration</a>
+        <button class="btn" type="button" data-bs-toggle="collapse" href="#togglethis">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="togglethis">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a href="people.html">People</a>
+                </li>
+                <li class="nav-item">
+                    <a href="vehicles.html">Vehicles</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- END NAVBAR -->
+    <div class="container">
+    	<div class="row">
+    		<div class="col">
+    			<h1>People</h1>
+    			<br>
+    			<a class="btn btn-primary" href="people.html">Back</a>
+    		</div>
+    	</div>
+    	<br>
+ 		<form>
+		    <div class="row">
+	    		<div class="col">
+		   			<div class="input-group">
+	   					<div class="col form-floating">
+	   						<input type="text" id="personFirstName" name="personFirstName" class="form-control" placeholder="First name:" required/>
+		    				<label for="personFirstName">First name:</label>
+	   					</div>
+	   					<div class="col form-floating">
+							<input type="text" id="personSurname" name="personSurname" class="form-control" placeholder="Surname:" required/>
+		    				<label for="personSurname">Surname:</label>
+	   					</div>
+	    			</div>
+	    		</div>
+	    	</div>
+	    	<br>
+			<div class="row">
+	    		<div class="col">
+		   			<div class="input-group">
+	   					<div class="col form-floating">
+	   						<input type="text" id="personAddress" name="personAddress" class="form-control" placeholder="Address:" required/>
+		    				<label for="personAddress">Address:</label>
+	   					</div>
+	   					<div class="col form-floating">
+	   						<input type="tel" id="personPhone" name="personPhone" class="form-control" placeholder="Phone number:" required/>
+		    				<label for="personNumber">Phone number:</label>
+	   					</div>
+	   				</div>
+	    		</div>
+	    	</div>
+	    	<br>
+	    	<div class="row">
+	    		<div class="col">
+		   			<div class="input-group">
+	   					<div class="col form-floating">
+	   					 	<div class="col form-floating text-center my-auto">
+		   						<button class="btn btn-primary" onClick="createPerson();">Submit</button>
+	   						</div>
+	   					</div>
+	   				</div>
+	    		</div>
+	    	</div>
+    	</form>
+    	
+    	<br>
+    	<div class="row">
+    		<div class="col-12">
+    			<div id="results">
+    				
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    
+	<!-- BOOTSTRAP JS -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+	<script src="js/people-create.js"></script>
+</body>
+</html>
