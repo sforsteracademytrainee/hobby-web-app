@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.qa.hobby.persistence.domain.VehicleDomain;
+import com.qa.hobby.persistence.dto.VehicleAltDTO;
 import com.qa.hobby.persistence.dto.VehicleDTO;
 import com.qa.hobby.persistence.repos.VehicleRepo;
 import com.qa.hobby.utils.MyBeanUtils;
@@ -24,6 +25,10 @@ public class VehicleService {
 		return this.mapper.map(model, VehicleDTO.class);
 	}
 	
+	private VehicleAltDTO mapToAltDTO(VehicleDomain model) {
+		return this.mapper.map(model, VehicleAltDTO.class);
+	}
+	
 	// Create
 	public VehicleDTO create(VehicleDomain model) {
 		return this.mapToDTO(this.repo.save(model));
@@ -32,6 +37,10 @@ public class VehicleService {
 	// Read
 	public VehicleDTO read(Long id) {
 		return this.mapToDTO(this.repo.findById(id).orElseThrow());
+	}
+	
+	public VehicleAltDTO readKeeper(Long id) {
+		return this.mapToAltDTO(this.repo.findById(id).orElseThrow());
 	}
 	
 	public List<VehicleDTO> readAll() {

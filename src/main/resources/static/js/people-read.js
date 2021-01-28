@@ -1,8 +1,6 @@
 const results = document.querySelector("#results");
 
 const idBox = document.querySelector("#personId");
-const firstNameBox = document.querySelector("#personFirstName");
-const surnameBox = document.querySelector("#personSurname");
 
 // Maybe give a page when the person does not exist
 
@@ -30,7 +28,7 @@ const searchPerson = () => {
 }
 
 const idSearch = (id) => {
-	fetch("person/read/"+id)
+	fetch("person/readVehicles/"+id)
 	.then((response) => {
 		if (response.status === 200) {
 			return response.json();
@@ -38,14 +36,7 @@ const idSearch = (id) => {
 			results.innerHTML = "Person does not exist.";
 		}
 	})
-	.then((json) => {
-		results.innerHTML = json.firstName + " " +json.surname + " " + json.address + " " + json.phone;
-		let button = document.createElement("button");
-		button.setAttribute("onClick", "idDelete("+id+");");
-		button.setAttribute("class", "btn btn-danger");
-		button.innerHTML = "Delete";
-		results.appendChild(button);
-	}) 
+	.then((json) => parseDetails(id, json)); 
 }
 
 const deletePerson = () => {
@@ -70,7 +61,55 @@ const idDelete = (id) => {
 	// need to make it cleaner when we do delte to make it more intuitive.
 }
 
-
+// Person details layout
+const parseDetails = (id, json) => {
+	let list = document.createElement("ul");
+	list.setAttribute("class", "list-group");
+	
+	let nameElement = document.createElement("li");
+	nameElement.setAttribute("class", "list-group-item");
+	let nameText = document.createTextNode(json.firstName + " " + json.surname);
+	nameElement.appendChild(nameText);
+	list.appendChild(nameElement);
+	
+	let addressElement = document.createElement("li")
+	addressElement.setAttribute("class", "list-group-item");
+	let addressText = document.createTextNode(json.address);
+	addressElement.appendChild(addressText);
+	list.appendChild(addressElement);
+	
+	let phoneElement = document.createElement("li");
+	phoneElement.setAttribute("class", "list-group-item");
+	let phoneText = document.createTextNode(json.phone);
+	phoneElement.appendChild(phoneText);
+	list.appendChild(phoneElement);
+	
+	
+	// do vehicles loop here
+	
+	for (let i = 0; i < json.vehicleList.length; i++) {
+		let vehicleElement = document.createElement("li");
+		vehicleElement.setAttribute("class", "list-group-item");
+		let vehicleText = document.createTextNode(json.vehicleList[i].registrationNumber + ": " + json.vehicleList[i].make + " " + json.vehicleList[i].model + " ");
+		vehicleElement.appendChild(vehicleText);
+		let vehicleLink = document.createElement("a");
+		vehicleLink.setAttribute("href", "/vehicles-read.html?id="+json.vehicleList[i].id)
+		let vehicleLinkText = document.createTextNode("View");
+		vehicleLink.appendChild(vehicleLinkText);
+		vehicleElement.appendChild(vehicleLink);
+		list.appendChild(vehicleElement);
+	}
+	
+	results.appendChild(list);	
+	
+	
+	// Delete button
+	let deleteButton = document.createElement("button");
+	deleteButton.setAttribute("onClick", "idDelete("+id+");");
+	deleteButton.setAttribute("class", "btn btn-danger");
+	deleteButton.innerHTML = "Delete";
+	results.appendChild(deleteButton);
+}
 
 // Button methods
 const idSubmit = () => {
