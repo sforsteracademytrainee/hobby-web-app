@@ -18,5 +18,5 @@ public class PersonAltDTO {
 	private String address;
 	private String phone;
 	
-	private List<VehicleAltDTO> vehicleList;
+	private List<VehicleDTO> vehicleList;
 }

@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.qa.hobby.persistence.domain.PersonDomain;
+import com.qa.hobby.persistence.dto.PersonAltDTO;
 import com.qa.hobby.persistence.dto.PersonDTO;
 import com.qa.hobby.persistence.repos.PersonRepo;
 import com.qa.hobby.utils.MyBeanUtils;
@@ -24,6 +25,10 @@ public class PersonService {
 		return this.mapper.map(model, PersonDTO.class);
 	}
 	
+	private PersonAltDTO mapToAltDTO(PersonDomain model) {
+		return this.mapper.map(model, PersonAltDTO.class);
+	}
+	
 	// Create
 	public PersonDTO create(PersonDomain model) {
 		return this.mapToDTO(this.repo.save(model));
@@ -32,6 +37,10 @@ public class PersonService {
 	// Read
 	public PersonDTO read(Long id) {
 		return this.mapToDTO(this.repo.findById(id).orElseThrow());
+	}
+	
+	public PersonAltDTO readVehicles(Long id) {
+		return this.mapToAltDTO(this.repo.findById(id).orElseThrow());
 	}
 	
 	public List<PersonDTO> readAll() {
