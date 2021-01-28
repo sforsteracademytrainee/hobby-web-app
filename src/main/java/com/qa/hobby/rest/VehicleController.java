@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.hobby.persistence.domain.VehicleDomain;
+import com.qa.hobby.persistence.dto.VehicleAltDTO;
 import com.qa.hobby.persistence.dto.VehicleDTO;
 import com.qa.hobby.service.VehicleService;
 
@@ -38,6 +39,11 @@ public class VehicleController {
 		@GetMapping("/read/{id}")
 		public ResponseEntity<VehicleDTO> read(@PathVariable("id") Long id) {
 			return new ResponseEntity<>(service.read(id), HttpStatus.OK);
+		}
+		
+		@GetMapping("/readKeeper/{id}")
+		public ResponseEntity<VehicleAltDTO> readKeeper(@PathVariable("id") Long id) {
+			return new ResponseEntity<>(service.readKeeper(id), HttpStatus.OK);
 		}
 		
 		@GetMapping("/readAll")

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.hobby.persistence.domain.PersonDomain;
+import com.qa.hobby.persistence.dto.PersonAltDTO;
 import com.qa.hobby.persistence.dto.PersonDTO;
 import com.qa.hobby.service.PersonService;
 
@@ -38,6 +39,11 @@ public class PersonController {
 	@GetMapping("/read/{id}")
 	public ResponseEntity<PersonDTO> read(@PathVariable("id") Long id) {
 		return new ResponseEntity<>(service.read(id), HttpStatus.OK);
+	}
+	
+	@GetMapping("/readVehicles/{id}")
+	public ResponseEntity<PersonAltDTO> readVehicles(@PathVariable("id") Long id) {
+		return new ResponseEntity<>(service.readVehicles(id), HttpStatus.OK);
 	}
 	
 	@GetMapping("/readAll")
