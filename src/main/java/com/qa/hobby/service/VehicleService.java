@@ -50,7 +50,11 @@ public class VehicleService {
 	// Update
 	public VehicleDTO update(Long id, VehicleDomain model) {
 		VehicleDomain updatedModel = this.repo.findById(id).orElseThrow();
+		boolean resetKeeper = false;
+		if (model.getKeeper() == null) resetKeeper = true; // in case we want to remove the keeper as merge overwrites nulls
 		MyBeanUtils.mergeNotNull(model, updatedModel);
+		
+		if (resetKeeper) updatedModel.setKeeper(null); // in case we want to remove the keeper
 		return this.mapToDTO(this.repo.save(updatedModel));
 	}
 	

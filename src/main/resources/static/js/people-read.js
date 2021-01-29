@@ -66,6 +66,12 @@ const parseDetails = (id, json) => {
 	let list = document.createElement("ul");
 	list.setAttribute("class", "list-group");
 	
+	let idElement = document.createElement("li");
+	idElement.setAttribute("class", "list-group-item");
+	let idText = document.createTextNode("Person ID: " + id);
+	idElement.appendChild(idText);
+	list.appendChild(idElement);
+	
 	let nameElement = document.createElement("li");
 	nameElement.setAttribute("class", "list-group-item");
 	let nameText = document.createTextNode(json.firstName + " " + json.surname);
@@ -101,7 +107,7 @@ const parseDetails = (id, json) => {
 	}
 	
 	results.appendChild(list);	
-	
+	results.appendChild(document.createElement("br"))
 	
 	// Delete button
 	let deleteButton = document.createElement("button");
