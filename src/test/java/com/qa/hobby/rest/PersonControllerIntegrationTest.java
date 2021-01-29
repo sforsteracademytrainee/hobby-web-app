@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
@@ -23,7 +22,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qa.hobby.HobbyWebAppApplication;
 import com.qa.hobby.persistence.domain.PersonDomain;
-import com.qa.hobby.persistence.domain.VehicleDomain;
+import com.qa.hobby.persistence.dto.PersonAltDTO;
 import com.qa.hobby.persistence.dto.PersonDTO;
 import com.qa.hobby.persistence.dto.VehicleDTO;
 
@@ -96,7 +95,31 @@ public class PersonControllerIntegrationTest {
 	}
 	
 	@Test
-	public void testReadAll() throws Exception{
+	public void testReadVehicles() throws Exception {
+		final Long ID = 1L;
+		List<VehicleDTO> TEST_VEHICLES = new ArrayList<VehicleDTO>();
+		TEST_VEHICLES.add(new VehicleDTO(1L, "AA11 AAA", "Ford", "Ka"));
+		TEST_VEHICLES.add(new VehicleDTO(3L, "CC33 CCC", "BMW", "Gran Tourer"));
+		PersonAltDTO TEST_DTO = new PersonAltDTO(ID, "Rupert", "Robinson", "32 Drive Way", "07 111 111 111", TEST_VEHICLES);
+		
+		// Prepared REST request
+		MockHttpServletRequestBuilder mockRequest =
+				MockMvcRequestBuilders.request(HttpMethod.GET, "/person/readVehicles/"+ID)
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON);
+		
+		// Assertion checks
+		ResultMatcher matchContent = MockMvcResultMatchers.content().json(this.jsonifier.writeValueAsString(TEST_DTO));
+		ResultMatcher matchStatus = MockMvcResultMatchers.status().isOk();
+		
+		// Perform & assert
+		this.mock.perform(mockRequest)
+		.andExpect(matchStatus)
+		.andExpect(matchContent);
+	}
+	
+	@Test
+	public void testReadAll() throws Exception {
 		List<PersonDTO> TEST_DTOS = new ArrayList<PersonDTO>();
 		TEST_DTOS.add(new PersonDTO(1L, "Rupert", "Robinson", "32 Drive Way", "07 111 111 111"));
 		TEST_DTOS.add(new PersonDTO(2L, "Tex", "Johnson", "17 Lane Road", "07 222 222 222"));

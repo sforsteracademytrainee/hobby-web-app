@@ -15,7 +15,6 @@ import com.qa.hobby.HobbyWebAppApplication;
 import com.qa.hobby.persistence.domain.PersonDomain;
 import com.qa.hobby.persistence.domain.VehicleDomain;
 import com.qa.hobby.persistence.dto.PersonDTO;
-import com.qa.hobby.persistence.dto.VehicleDTO;
 import com.qa.hobby.persistence.repos.PersonRepo;
 
 @SpringBootTest(classes = HobbyWebAppApplication.class)
