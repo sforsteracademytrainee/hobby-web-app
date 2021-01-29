@@ -17,7 +17,6 @@ const createPerson = () => {
 			"phone": phone,
 	        "vehicleList": [{}]
 	    });
-		console.log(json);
 	    fetch("/person/create", {
 		    method: 'POST',
 		    body: json,
@@ -26,7 +25,11 @@ const createPerson = () => {
 		    }
 		})
 		.then(response => response.json())
-	    .then(json => console.log(json))
+	    .then(json => {
+			if (json.id != null) {
+				window.location.href = "people-read.html?id="+json.id;
+			}
+		})
 	    .catch(err => console.error(err))
 	}
 }

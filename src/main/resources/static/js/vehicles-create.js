@@ -8,21 +8,23 @@ const createVehicle = () => {
 	let model = modelBox.value;
 	
 	if (reg != "" && make != "" && model != "") {
-		let json = JSON.stringify({
-	        "registrationNumber": reg,
-	        "make": make,
-			"model": model
-	    })
-		console.log(json);
 	    fetch("/vehicle/create", {
 		    method: 'POST',
-		    body: json,
+		    body: JSON.stringify({
+		        "registrationNumber": reg,
+		        "make": make,
+				"model": model
+		    }),
 		    headers: {
 		        'Content-type': 'application/json'
 		    }
 		})
 		.then(response => response.json())
-	    .then(json => console.log(json))
+	    .then(json => {
+			if (json.id != null) {
+				window.location.href = "vehicles-read.html?id="+json.id;
+			}
+		})
 	    .catch(err => console.error(err))
 	}
 }
