@@ -16,7 +16,7 @@ const createPerson = () => {
 			"address": address,
 			"phone": phone,
 	        "vehicleList": [{}]
-	    })
+	    });
 		console.log(json);
 	    fetch("/person/create", {
 		    method: 'POST',

@@ -10,7 +10,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
@@ -23,9 +22,10 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qa.hobby.HobbyWebAppApplication;
 import com.qa.hobby.persistence.domain.VehicleDomain;
+import com.qa.hobby.persistence.dto.PersonAltDTO;
+import com.qa.hobby.persistence.dto.PersonDTO;
+import com.qa.hobby.persistence.dto.VehicleAltDTO;
 import com.qa.hobby.persistence.dto.VehicleDTO;
-
-import net.bytebuddy.asm.Advice.This;
 
 @SpringBootTest(classes = HobbyWebAppApplication.class)
 @AutoConfigureMockMvc
@@ -84,6 +84,28 @@ public class VehicleControllerIntegrationTest {
 		// Prepared REST request
 		MockHttpServletRequestBuilder mockRequest = 
 				MockMvcRequestBuilders.request(HttpMethod.GET, "/vehicle/read/"+ID)
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON);
+		
+		// Assertion checks
+		ResultMatcher matchContent = MockMvcResultMatchers.content().json(this.jsonifier.writeValueAsString(TEST_DTO));
+		ResultMatcher matchStatus = MockMvcResultMatchers.status().isOk();
+		
+		// Perform & assert
+		this.mock.perform(mockRequest)
+		.andExpect(matchStatus)
+		.andExpect(matchContent);
+	}
+	
+	@Test
+	public void testReadKeeper() throws Exception {
+		final Long ID = 1L;
+		PersonDTO TEST_KEEPER = new PersonDTO(1L, "Rupert", "Robinson", "32 Drive Way", "07 111 111 111");
+		VehicleAltDTO TEST_DTO = new VehicleAltDTO(ID, "AA11 AAA", "Ford", "Ka", TEST_KEEPER);
+		
+		// Prepared REST request
+		MockHttpServletRequestBuilder mockRequest =
+				MockMvcRequestBuilders.request(HttpMethod.GET, "/vehicle/readKeeper/"+ID)
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON);
 		

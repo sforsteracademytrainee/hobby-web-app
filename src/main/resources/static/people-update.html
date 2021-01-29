@@ -29,13 +29,30 @@
     <div class="container">
     	<div class="row">
     		<div class="col">
-    			<h1>People create</h1>
+    			<h1>People update</h1>
     			<br>
     			<a class="btn btn-primary" href="people.html">Back</a>
     		</div>
     	</div>
     	<br>
- 		<form>
+    	<div class="row">
+    		<div class="col">
+    			<div class="col input-group">
+    				<div class="form-floating">
+    				    <input type="number" id="personId" name="personId" class="form-control" placeholder="Person ID:"/>
+	    				<label for="personId">Person ID:</label>
+    				</div>
+    				<button class="btn btn-primary" onClick="idSubmit();">Go</button>
+    			</div>
+    		</div>
+    	</div>
+    	<br>
+ 		<form id="form" class="d-none" onSubmit="return false;">
+ 			<div class="row">
+ 				<div class="col">
+ 					<h3 id="currentEdit"></h3>
+ 				</div>
+ 			</div>
 		    <div class="row">
 	    		<div class="col">
 		   			<div class="input-group">
@@ -71,14 +88,13 @@
 		   			<div class="input-group">
 	   					<div class="col form-floating">
 	   					 	<div class="col form-floating text-center my-auto">
-		   						<button class="btn btn-primary" onClick="createPerson();">Submit</button>
+		   						<button class="btn btn-primary" id="updateButton">Submit</button>
 	   						</div>
 	   					</div>
 	   				</div>
 	    		</div>
 	    	</div>
     	</form>
-    	
     	<br>
     	<div class="row">
     		<div class="col-12">
@@ -91,6 +107,6 @@
     
 	<!-- BOOTSTRAP JS -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-	<script src="js/people-create.js"></script>
+	<script src="js/people-update.js"></script>
 </body>
 </html>

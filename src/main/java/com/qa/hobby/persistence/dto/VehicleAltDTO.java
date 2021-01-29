@@ -14,8 +14,8 @@ public class VehicleAltDTO {
 	private Long id;
 	
 	private String registrationNumber;
-	private String model;
 	private String make;
+	private String model;
 	
 	private PersonDTO keeper;
 }

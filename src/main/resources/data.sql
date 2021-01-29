@@ -1,0 +1,8 @@
+INSERT INTO PERSON_DOMAIN(FIRST_NAME, SURNAME, ADDRESS, PHONE) VALUES
+('Rupert', 'Robinson', '32 Drive Way', '07 111 111 111'),
+('Tex', 'Johnson', '17 Lane Road', '07 222 222 222');
+
+INSERT INTO VEHICLE_DOMAIN(REGISTRATION_NUMBER, MAKE, MODEL, KEEPER_ID) VALUES
+('AA11 AAA', 'Ford', 'Ka', 1),
+('BB22 BBB', 'Toyota', 'Prius', 2),
+('CC33 CCC', 'BMW', 'Gran Tourer', 1);
