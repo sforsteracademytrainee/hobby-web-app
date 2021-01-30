@@ -36,7 +36,7 @@ const idSearch = (id) => {
 			results.innerHTML = "Person does not exist.";
 		}
 	})
-	.then((json) => parseDetails(id, json)); 
+	.then((json) => parseDetails(json)); 
 }
 
 const deletePerson = () => {
@@ -62,13 +62,13 @@ const idDelete = (id) => {
 }
 
 // Person details layout
-const parseDetails = (id, json) => {
+const parseDetails = (json) => {
 	let list = document.createElement("ul");
 	list.setAttribute("class", "list-group");
 	
 	let idElement = document.createElement("li");
 	idElement.setAttribute("class", "list-group-item");
-	let idText = document.createTextNode("Person ID: " + id);
+	let idText = document.createTextNode("Person ID: " + json.id);
 	idElement.appendChild(idText);
 	list.appendChild(idElement);
 	
@@ -91,7 +91,7 @@ const parseDetails = (id, json) => {
 	list.appendChild(phoneElement);
 	
 	
-	// do vehicles loop here
+	// do vehicles loop here12345
 	
 	for (let i = 0; i < json.vehicleList.length; i++) {
 		let vehicleElement = document.createElement("li");
@@ -111,7 +111,7 @@ const parseDetails = (id, json) => {
 	
 	// Delete button
 	let deleteButton = document.createElement("button");
-	deleteButton.setAttribute("onClick", "idDelete("+id+");");
+	deleteButton.setAttribute("onClick", "idDelete("+json.id+");");
 	deleteButton.setAttribute("class", "btn btn-danger");
 	deleteButton.innerHTML = "Delete";
 	results.appendChild(deleteButton);

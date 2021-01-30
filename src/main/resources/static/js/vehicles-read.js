@@ -36,7 +36,7 @@ const idSearch = (id) => {
 			results.innerHTML = "Vehicle does not exist.";
 		}
 	})
-	.then((json) => parseDetails(id, json)); 
+	.then((json) => parseDetails(json)); 
 }
 
 const deleteVehicle = () => {
@@ -62,14 +62,14 @@ const idDelete = (id) => {
 }
 
 // Person details layout
-const parseDetails = (id, json) => {
-	console.log(json);
+const parseDetails = (json) => {
+	
 	let list = document.createElement("ul");
 	list.setAttribute("class", "list-group");
 	
 	let idElement = document.createElement("li");
 	idElement.setAttribute("class", "list-group-item");
-	let idText = document.createTextNode("Vehicle ID: " + id);
+	let idText = document.createTextNode("Vehicle ID: " + json.id);
 	idElement.appendChild(idText);
 	list.appendChild(idElement);
 	
@@ -84,7 +84,6 @@ const parseDetails = (id, json) => {
 	let addressText = document.createTextNode(json.make + " " + json.model);
 	addressElement.appendChild(addressText);
 	list.appendChild(addressElement);
-	console.log(json.keeper);
 	
 	let keeperAdd = document.createElement("div");
 	keeperAdd.setAttribute("class", "col form-floating input-group");
@@ -142,11 +141,12 @@ const parseDetails = (id, json) => {
 		let removeButton = document.createElement("button");
 		removeButton.setAttribute("onClick", "keeperRemove();");
 		removeButton.setAttribute("class", "btn btn-warning");
+		removeButton.setAttribute("id", "keeperButton")
 		removeButton.innerHTML = "Remove keeper";
 		results.appendChild(removeButton);
 	}
 	let deleteButton = document.createElement("button");
-	deleteButton.setAttribute("onClick", "idDelete("+id+");");
+	deleteButton.setAttribute("onClick", "idDelete("+json.id+");");
 	deleteButton.setAttribute("class", "btn btn-danger");
 	deleteButton.innerHTML = "Delete";
 	results.appendChild(deleteButton);
