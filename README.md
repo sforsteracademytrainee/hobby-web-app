@@ -16,8 +16,8 @@ You can find my Jira board [here](https://20novsimontest.atlassian.net/secure/Ra
 
 ### Installing
 
-You can download a working war from [here](https://github.com/sforsteracademytrainee/hobby-web-app/releases/tag/1.0).
-The provided jar build only works with a locally hosted MySQL instance with a schema called `hobby_web_app` with login details of `root` & `root`.
+You can download a working build from [here](https://github.com/sforsteracademytrainee/hobby-web-app/releases/tag/1.0).
+The provided jar/war build only works with a locally hosted MySQL instance with a schema called `hobby_web_app` with login details of `root` & `root`.
 
 If you wish to build the project yourself here are the instructions.
 
