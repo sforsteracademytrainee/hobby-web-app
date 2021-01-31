@@ -1,6 +1,6 @@
 # Vehicle registration system
 
-Vehicle registration 
+Vehicle registration system to keep track of vehicles' details and their keepers' details through a website interface.
 
 ## Getting Started
 
