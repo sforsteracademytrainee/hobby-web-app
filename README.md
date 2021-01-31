@@ -12,6 +12,8 @@ You can find my Jira board [here](https://20novsimontest.atlassian.net/secure/Ra
 
 * Java SE 11
 
+* Spring Boot 2.4.2
+
 * An instance of MySQL server 5.7
 
 ### Installing
