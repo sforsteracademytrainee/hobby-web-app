@@ -160,7 +160,7 @@ public class FrontEndIntegrationtTest {
 		Long test_id = website.vehicles.read.readId();
 		Long result = website.vehicles.read.search(test_id);
 		assertEquals(result, test_id);
-		if (result == 1L) {
+		if (result == test_id) {
 			test.log(LogStatus.PASS, "Successfully read the vehicle.");
 		} else {
 			test.log(LogStatus.FAIL, "Failed to read the vehicle.");
