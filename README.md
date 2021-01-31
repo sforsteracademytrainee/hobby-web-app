@@ -6,7 +6,7 @@ Vehicle registration system to keep track of vehicles' details and their keepers
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-You can find my Kanban board [here](https://20novsimontest.atlassian.net/secure/RapidBoard.jspa?rapidView=6&projectKey=PRO2).
+You can find my Jira board [here](https://20novsimontest.atlassian.net/secure/RapidBoard.jspa?rapidView=6&projectKey=PRO2).
 
 ### Prerequisites
 
@@ -16,7 +16,7 @@ You can find my Kanban board [here](https://20novsimontest.atlassian.net/secure/
 
 ### Installing
 
-You can download a working jar from [here](linky linky).
+You can download a working war from [here](https://github.com/sforsteracademytrainee/hobby-web-app/releases/tag/1.0).
 The provided jar build only works with a locally hosted MySQL instance with a schema called `hobby_web_app` with login details of `root` & `root`.
 
 If you wish to build the project yourself here are the instructions.
@@ -35,7 +35,7 @@ Once this is done you should test the program using the provided tests. If it al
 
 ## Running the tests
 
-You can run all all the tests by using `mvn test` in a command prompt at the project folder. Make sure you have entered database details in the `application.properties` files as the backend tests use a test h2 database however the Selenium tests need to run on a live system.
+You can run all all the tests by using `mvn test` in a command prompt at the project folder. Make sure you have entered database details in the `application.properties` files as the backend tests use a test h2 database however the Selenium tests need to run on the live database.
 
 All the tests are located in the `src/test` folder.
 

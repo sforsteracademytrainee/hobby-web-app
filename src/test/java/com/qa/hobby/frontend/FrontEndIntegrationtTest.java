@@ -57,12 +57,13 @@ public class FrontEndIntegrationtTest {
 	
 	@Test
 	public void testPersonRead() { // working
-		final Long test_id = 1L;
 		test = extent.startTest("Person read");
 		driver.get("http://localhost:8080");
 		HomePage website = PageFactory.initElements(driver, HomePage.class);
 		website.navPeople();
-		website.people.navRead();
+		website.people.navCreate();
+		website.people.create.createPerson("Test", "Name", "2 Road Lane", "132");
+		Long test_id = website.people.read.readId();
 		Long result = website.people.read.search(test_id);
 		assertEquals(result, test_id);
 		if (result == test_id) {
@@ -150,12 +151,13 @@ public class FrontEndIntegrationtTest {
 	
 	@Test
 	public void testVehicleRead() {
-		final Long test_id = 1L;
 		test = extent.startTest("Vehicle read");
 		driver.get("http://localhost:8080");
 		HomePage website = PageFactory.initElements(driver, HomePage.class);
 		website.navVehicles();
-		website.vehicles.navRead();
+		website.vehicles.navCreate();
+		website.vehicles.create.createVehicle("DD11 DDD", "Fiat", "500");
+		Long test_id = website.vehicles.read.readId();
 		Long result = website.vehicles.read.search(test_id);
 		assertEquals(result, test_id);
 		if (result == 1L) {
