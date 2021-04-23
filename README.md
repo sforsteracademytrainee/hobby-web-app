@@ -44,6 +44,7 @@ All the tests are located in the `src/test` folder.
 The tests make sure that the database connection is functional and that the user input is handled correctly.
 
 We currently have >90% coverage in the REST & services methods.
+
 ![text](https://i.imgur.com/TfHM8mJ.png)
 ![text](https://i.imgur.com/4hgxibt.png)
 
